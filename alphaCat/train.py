@@ -29,25 +29,25 @@ class Human(object):
     def __str__(self):
         return "HUman {}".format(self.player)
 
-    def run(self):
-        n=5
-        width,height=8,8
-        model_file='current_policy.model'
-        try:
-            board=Board(width=width,height=height,n_in_row=n)
-            game=Game(board)
+def run():
+    n=5
+    width,height=8,8
+    model_file='current_policy.model'
+    try:
+        board=Board(width=width,height=height,n_in_row=n)
+        game=Game(board)
 
-            #create AI player
-            best_policy=PolicyValueNet(width,height,model_file)
-            mcts_playre=MCTSPLayer(best_policy.policy_value_fn,c_puct=5,n_playout=400)
+        #create AI player
+        best_policy=PolicyValueNet(width,height,model_file)
+        mcts_playre=MCTSPLayer(best_policy.policy_value_fn,c_puct=5,n_playout=400)
 
-            #create Human player
-            human=Human()
+        #create Human player
+        human=Human()
 
-            game.start_play(human,mcts_playre,start_player=1,is_show=1)
-        except KeyboardInterrupt:
-            print('\r\n quit!')
+        game.start_play(human,mcts_playre,start_player=1,is_show=1)
+    except KeyboardInterrupt:
+        print('\r\n quit!')
 
 
-    if __name__=="__main__":
+if __name__=="__main__":
         run()
